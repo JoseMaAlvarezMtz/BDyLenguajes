@@ -34,7 +34,7 @@ public class Principal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        R_Entradas = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         contenedor = new javax.swing.JDesktopPane();
 
@@ -90,12 +90,17 @@ public class Principal extends javax.swing.JFrame {
         jButton2.setBorderPainted(false);
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, -1, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrada-producto.png"))); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, -1));
+        R_Entradas.setBackground(new java.awt.Color(255, 255, 255));
+        R_Entradas.setForeground(new java.awt.Color(255, 255, 255));
+        R_Entradas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrada-producto.png"))); // NOI18N
+        R_Entradas.setBorder(null);
+        R_Entradas.setBorderPainted(false);
+        R_Entradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R_EntradasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(R_Entradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, -1));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,6 +146,13 @@ public class Principal extends javax.swing.JFrame {
               // TODO add your handling code here:
     }//GEN-LAST:event_R_ProductosActionPerformed
 
+    private void R_EntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R_EntradasActionPerformed
+        Entradas f = new Entradas();
+        contenedor.add(f);
+        f.show();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_R_EntradasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,11 +184,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton R_Entradas;
     private javax.swing.JButton R_Productos;
     private javax.swing.JDesktopPane contenedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
