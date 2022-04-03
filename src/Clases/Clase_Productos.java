@@ -15,7 +15,7 @@ public class Clase_Productos {
     private final Conectar CN;
     private DefaultTableModel DT;
     private final String SQL_INSERT_PRODUCTOS = "INSERT INTO Producto (idProducto, nom_Producto,"
-            + "descripcion_Producto, precio_Producto, precio_sugerido, fecha_registro) values (?,?,?,?,?,?)";
+            + "descripcion_Producto, precio_Producto, precio_sugerido, fecha_registro, idProveedor) values (?,?,?,?,?,?,?)";
     private final String SQL_SELECT_PRODUCTOS = "SELECT *FROM Producto";
     
     public Clase_Productos(){
@@ -36,6 +36,9 @@ public class Clase_Productos {
         DT.addColumn("Precio");
         DT.addColumn("Precio sugerido");
         DT.addColumn("Fecha de registro");
+        DT.addColumn("Codigo del Proveedor");
+      //  DT.addColumn("Nombre del Proveedor");
+        
         return DT;
     }
     
@@ -44,7 +47,7 @@ public class Clase_Productos {
             setTitulosProductos();
             PS = CN.getConnection().prepareStatement(SQL_SELECT_PRODUCTOS);
             RS = PS.executeQuery();
-            Object[] fila = new Object[6];
+            Object[] fila = new Object[7];
             while(RS.next()){
                 fila[0] = RS.getString(1);
                 fila[1] = RS.getString(2);
@@ -52,6 +55,8 @@ public class Clase_Productos {
                 fila[3] = RS.getString(4);
                 fila[4] = RS.getString(5);
                 fila[5] = RS.getDate(6);
+                fila[6] = RS.getString(7);
+           //     fila[7] = RS.getString(8);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {
@@ -64,7 +69,7 @@ public class Clase_Productos {
         return DT;
     }
     
-    public int registrarProducto(String codigo, String nombre, String descripcion, String precio, String preciosugerido, Date fecharegistro){
+    public int registrarProducto(String codigo, String nombre, String descripcion, String precio, String preciosugerido, Date fecharegistro, String codigoproveedor){
         int res=0;
         
         try {
@@ -75,6 +80,8 @@ public class Clase_Productos {
             PS.setString(4, precio);
             PS.setString(5, preciosugerido);
             PS.setDate(6, fecharegistro);
+            PS.setString(7, codigoproveedor);
+          //  PS.setString(8, nombreproveedor);
             
             res = PS.executeUpdate();
             if(res > 0){
@@ -124,8 +131,8 @@ public class Clase_Productos {
     }
     
     
-    public int actualizarProducto(String codigo, String nombre, String descripcion, String precio, String preciosugerido, Date fecharegistro,  String codigo_old){
-        String SQL = "UPDATE Producto SET idProducto='"+codigo+"',nom_Producto='"+nombre+"',descripcion_Producto='"+descripcion+"',precio_Producto='"+precio+"',precio_sugerido='"+preciosugerido+"',fecha_registro='"+fecharegistro+"' WHERE idProducto='"+codigo_old+"'";
+    public int actualizarProducto(String codigo, String nombre, String descripcion, String precio, String preciosugerido, Date fecharegistro, String codigoproveedor,  String codigo_old){
+        String SQL = "UPDATE Producto SET idProducto='"+codigo+"',nom_Producto='"+nombre+"',descripcion_Producto='"+descripcion+"',precio_Producto='"+precio+"',precio_sugerido='"+preciosugerido+"',fecha_registro='"+fecharegistro+"',idProveedor='"+codigoproveedor+"' WHERE idProducto='"+codigo_old+"'";
         int res=0;
         try {
             PS = CN.getConnection().prepareStatement(SQL);
