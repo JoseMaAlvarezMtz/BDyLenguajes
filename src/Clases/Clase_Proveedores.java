@@ -5,25 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.sql.Date;
-import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Clase_Productos {
+public class Clase_Proveedores {
     private PreparedStatement PS;
     private ResultSet RS;
     private final Conectar CN;
     private DefaultTableModel DT;
-    private final String SQL_INSERT_PRODUCTOS = "INSERT INTO Producto (idProducto, nom_Producto,"
-            + "descripcion_Producto, precio_Producto, precio_sugerido, fecha_registro, idProveedor) values (?,?,?,?,?,?,?)";
-    private final String SQL_SELECT_PRODUCTOS = "SELECT *FROM Producto";
+    private final String SQL_INSERT_PROVEEDOR = "INSERT INTO Proveedor (idProveedor, nombre_Proveedor,"
+            + "telefono_Proveedor, telefono2_Proveedor, direccion_Proveedor, email_Proveedor, descripcion_Proveedor) values (?,?,?,?,?,?,?)";
+    private final String SQL_SELECT_PROVEEDOR = "SELECT *FROM Proveedor";
     
-    public Clase_Productos(){
+    public Clase_Proveedores(){
         PS = null;
         CN = new Conectar();
     }
     
-    private DefaultTableModel setTitulosProductos(){
+    private DefaultTableModel setTitulosProveedor(){
         DT = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -32,20 +31,19 @@ public class Clase_Productos {
         };
         DT.addColumn("Codigo");
         DT.addColumn("Nombre");
-        DT.addColumn("Descripción");
-        DT.addColumn("Precio");
-        DT.addColumn("Precio sugerido");
-        DT.addColumn("Fecha de registro");
-        DT.addColumn("Codigo del Proveedor");
-      //  DT.addColumn("Nombre del Proveedor");
+        DT.addColumn("Telefono");
+        DT.addColumn("Telfono no. 2");
+        DT.addColumn("Direccion");
+        DT.addColumn("Email");
+        DT.addColumn("Descripcion");
         
         return DT;
     }
     
-    public DefaultTableModel getDatosProductos(){
+    public DefaultTableModel getDatosProveedores(){
         try {
-            setTitulosProductos();
-            PS = CN.getConnection().prepareStatement(SQL_SELECT_PRODUCTOS);
+            setTitulosProveedor();
+            PS = CN.getConnection().prepareStatement(SQL_SELECT_PROVEEDOR);
             RS = PS.executeQuery();
             Object[] fila = new Object[7];
             while(RS.next()){
@@ -54,9 +52,8 @@ public class Clase_Productos {
                 fila[2] = RS.getString(3);
                 fila[3] = RS.getString(4);
                 fila[4] = RS.getString(5);
-                fila[5] = RS.getDate(6);
+                fila[5] = RS.getString(6);
                 fila[6] = RS.getString(7);
-           //     fila[7] = RS.getString(8);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {
@@ -69,27 +66,27 @@ public class Clase_Productos {
         return DT;
     }
     
-    public int registrarProducto(String codigo, String nombre, String descripcion, String precio, String preciosugerido, Date fecharegistro, String codigoproveedor){
+    public int registrarProveedor(String codigo, String nombre_prove, String telefono, String telefono2, String direccion, String email, String descripcion){
         int res=0;
         
         try {
-            PS = CN.getConnection().prepareStatement(SQL_INSERT_PRODUCTOS);
+            PS = CN.getConnection().prepareStatement(SQL_INSERT_PROVEEDOR);
             PS.setString(1, codigo);
-            PS.setString(2, nombre);
-            PS.setString(3, descripcion);
-            PS.setString(4, precio);
-            PS.setString(5, preciosugerido);
-            PS.setDate(6, fecharegistro);
-            PS.setString(7, codigoproveedor);
+            PS.setString(2, nombre_prove);
+            PS.setString(3, telefono);
+            PS.setString(4, telefono2);
+            PS.setString(5, direccion);
+            PS.setString(6, email);
+            PS.setString(7, descripcion);
           //  PS.setString(8, nombreproveedor);
             
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto registrado con éxito.");
+                JOptionPane.showMessageDialog(null, "Proveedor registrado con éxito.");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo registrar el producto.");
-            System.err.println("Error al registrar el producto." +e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el proveedor.");
+            System.err.println("Error al registrar el proveedor." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();
@@ -98,10 +95,10 @@ public class Clase_Productos {
     }
     
     
-    public void insertarProductoInventario(String codigoProducto){
+    public void insertarProveedor(String codigoProveedor){
         int res;
         try {
-            PS = CN.getConnection().prepareStatement("CALL NUEVO_PRODUCTO('"+codigoProducto+"')");
+            PS = CN.getConnection().prepareStatement("CALL NUEVO_PROVEEDOR('"+codigoProveedor+"')");
             PS.executeQuery();
         } catch (SQLException e) {
             System.err.println("Error al insertar registro en la tabla inventario." +e.getMessage());
@@ -111,10 +108,10 @@ public class Clase_Productos {
         }
     } 
     
-    public int verificarCodigoInventario(String codigo){
+       public int verificarCodigoProveedor(String codigo){
         int res=0;
         try {
-            PS = CN.getConnection().prepareStatement("SELECT count(codigo_Inventario) from Inventario where codigo_Inventario='"+codigo+"'");
+            PS = CN.getConnection().prepareStatement("SELECT count(idProveedor) from Proveedor where idProveedor='"+codigo+"'");
             RS = PS.executeQuery();
            
             while(RS.next()){
@@ -128,17 +125,17 @@ public class Clase_Productos {
             CN.desconectar();
         }
         return res;
-    }
+    } 
     
     
-    public int actualizarProducto(String codigo, String nombre, String descripcion, String precio, String preciosugerido, Date fecharegistro, String codigoproveedor,  String codigo_old){
-        String SQL = "UPDATE Producto SET idProducto='"+codigo+"',nom_Producto='"+nombre+"',descripcion_Producto='"+descripcion+"',precio_Producto='"+precio+"',precio_sugerido='"+preciosugerido+"',fecha_registro='"+fecharegistro+"',idProveedor='"+codigoproveedor+"' WHERE idProducto='"+codigo_old+"'";
+    public int actualizarProveedor(String codigo, String nombre_prove, String telefono, String telefono2, String direccion, String email, String descripcion,  String codigo_old){
+        String SQL = "UPDATE Proveedor SET idProveedor='"+codigo+"',nombre_Proveedor='"+nombre_prove+"',telefono_Proveedor='"+telefono+"',telefono2_Proveedor='"+telefono2+"',direccion_Proveedor='"+direccion+"',email_Proveedor='"+email+"',descripcion_Proveedor='"+descripcion+"' WHERE idProveedor='"+codigo_old+"'";
         int res=0;
         try {
             PS = CN.getConnection().prepareStatement(SQL);
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
+                JOptionPane.showMessageDialog(null, "Proveedor actualizado con éxito");
             }
         } catch (SQLException e) {
             System.err.println("Error al modificar los datos del cliente." +e.getMessage());
@@ -149,23 +146,22 @@ public class Clase_Productos {
         return res;
     }
     
-    public int eliminarProducto(String codigo){
-        String SQL = "DELETE from Producto WHERE idProducto ='"+codigo+"'";
+    public int eliminarProveedor(String codigo){
+        String SQL = "DELETE from Proveedor WHERE idProveedor ='"+codigo+"'";
         int res=0;
         try {
             PS = CN.getConnection().prepareStatement(SQL);
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto eliminado con éxito");
+                JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No es posible eliminar el producto.");
-            System.err.println("Error al eliminar producto." +e.getMessage());
+            JOptionPane.showMessageDialog(null, "No es posible eliminar el proveedor.");
+            System.err.println("Error al eliminar el proveedor." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();
         }
         return res;
     }
-
 }

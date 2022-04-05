@@ -7,21 +7,20 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class Clase_BuscarProductos {
+public class Clase_BuscarProveedores {
     private PreparedStatement PS;
     private ResultSet RS;
     private final Conectar CN;
     private DefaultTableModel DT;
-    private final String SQL_SELECT_PROVEEDOR = "SELECT idProovedor, nombre_Proveedor, "
-            + "FROM Proovedor INNER JOIN Producto ON idProovedor = idProovedor ORDER BY idProovedor ASC";
+    private final String SQL_SELECT_PROVEEDOR = "SELECT *FROM Proveedor";
     
     
-    public Clase_BuscarProductos(){
+    public Clase_BuscarProveedores(){
         PS = null;
         CN = new Conectar();
     }
     
-    private DefaultTableModel setTitulosProductos(){
+    private DefaultTableModel setTitulosProveedor(){
         DT = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -35,16 +34,15 @@ public class Clase_BuscarProductos {
         return DT;
     }
     
-    public DefaultTableModel getDatosProductos(){
+    public DefaultTableModel getDatosProveedor(){
         try {
-            setTitulosProductos();
+            setTitulosProveedor();
             PS = CN.getConnection().prepareStatement(SQL_SELECT_PROVEEDOR);
             RS = PS.executeQuery();
-            Object[] fila = new Object[4];
+            Object[] fila = new Object[3];
             while(RS.next()){
                 fila[0] = RS.getString(1);
                 fila[1] = RS.getString(2);
-                fila[2] = RS.getInt(3);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {
@@ -60,20 +58,19 @@ public class Clase_BuscarProductos {
     public DefaultTableModel getDatoP(int crt, String inf){
         String SQL;
         if (crt==2){
-            SQL = "SELECT idProovedor, nombre_Proveedor, FROM Proovedor INNER JOIN Producto ON idProovedor = idProovedor where idProovedor like '"+inf+"'";
+            SQL = "SSELECT *FROM Producto where idProovedor like '"+inf+"'";
         }
         else {
-            SQL = "SELECT idProovedor, nombre_Proveedor, FROM Proovedor INNER JOIN Producto ON idProovedor = idProovedor where nombre_Proveedor '" +inf + "%'";
+            SQL = "SELECT *FROM Producto where nombre_Proveedor '" +inf + "%'";
         }
         try {
-            setTitulosProductos();
+            setTitulosProveedor();
             PS = CN.getConnection().prepareStatement(SQL);
             RS = PS.executeQuery();
-            Object[] fila = new Object[4];
+            Object[] fila = new Object[3];
             while(RS.next()){
                 fila[0] = RS.getString(1);
                 fila[1] = RS.getString(2);
-                fila[2] = RS.getInt(3);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {

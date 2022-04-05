@@ -253,7 +253,7 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        jbt_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cheque.png"))); // NOI18N
+        jbt_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ic_consultas.png"))); // NOI18N
         jbt_buscar.setBorderPainted(false);
         jbt_buscar.setContentAreaFilled(false);
         jbt_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

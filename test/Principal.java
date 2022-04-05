@@ -29,11 +29,11 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Productos = new javax.swing.JButton();
+        R_Productos = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        Proveedores = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         R_Entradas = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         contenedor = new javax.swing.JDesktopPane();
@@ -53,18 +53,18 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setText("Mini Súper Ruiz");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 5, -1, -1));
 
-        Productos.setBackground(new java.awt.Color(255, 255, 255));
-        Productos.setForeground(new java.awt.Color(255, 255, 255));
-        Productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/producto.png"))); // NOI18N
-        Productos.setToolTipText("");
-        Productos.setBorder(null);
-        Productos.setBorderPainted(false);
-        Productos.addActionListener(new java.awt.event.ActionListener() {
+        R_Productos.setBackground(new java.awt.Color(255, 255, 255));
+        R_Productos.setForeground(new java.awt.Color(255, 255, 255));
+        R_Productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/producto.png"))); // NOI18N
+        R_Productos.setToolTipText("");
+        R_Productos.setBorder(null);
+        R_Productos.setBorderPainted(false);
+        R_Productos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProductosActionPerformed(evt);
+                R_ProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+        jPanel1.add(R_Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,17 +83,12 @@ public class Principal extends javax.swing.JFrame {
         jSeparator2.setRequestFocusEnabled(false);
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 60, 940, 10));
 
-        Proveedores.setBackground(new java.awt.Color(255, 255, 255));
-        Proveedores.setForeground(new java.awt.Color(255, 255, 255));
-        Proveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-usuario.png"))); // NOI18N
-        Proveedores.setBorder(null);
-        Proveedores.setBorderPainted(false);
-        Proveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProveedoresActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, -1, -1));
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-usuario.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, -1, -1));
 
         R_Entradas.setBackground(new java.awt.Color(255, 255, 255));
         R_Entradas.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,12 +139,12 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductosActionPerformed
+    private void R_ProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R_ProductosActionPerformed
         Productos f = new Productos();
         contenedor.add(f);
         f.show();
               // TODO add your handling code here:
-    }//GEN-LAST:event_ProductosActionPerformed
+    }//GEN-LAST:event_R_ProductosActionPerformed
 
     private void R_EntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R_EntradasActionPerformed
         Entradas f = new Entradas();
@@ -157,13 +152,6 @@ public class Principal extends javax.swing.JFrame {
         f.show();
         // TODO add your handling code here:
     }//GEN-LAST:event_R_EntradasActionPerformed
-
-    private void ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProveedoresActionPerformed
-        // TODO add your handling code here:
-        Proveedores f = new Proveedores();
-        contenedor.add(f);
-        f.show();
-    }//GEN-LAST:event_ProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,11 +184,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Productos;
-    private javax.swing.JButton Proveedores;
     private javax.swing.JButton R_Entradas;
+    private javax.swing.JButton R_Productos;
     public static javax.swing.JDesktopPane contenedor;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
