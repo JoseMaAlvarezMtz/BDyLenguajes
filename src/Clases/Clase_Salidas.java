@@ -16,16 +16,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Pelon
  */
-public class Clase_Entradas {
+public class Clase_Salidas {
     private PreparedStatement PS;
     private ResultSet RS;
     private final Conectar CN;
     private DefaultTableModel DT;
-    private final String SQL_INSERT_ENTRADAS = "INSERT INTO Entradas (codigo_Entrada, fecha_Entrada,"
-            + "cantidad_Entrada, idProveedor) values (?,?,?,?)";
+    private final String SQL_INSERT_ENTRADAS = "INSERT INTO Entradas (idProducto, nom_Producto,"
+            + "descripcion_Producto, precio_Producto, precio_sugerido, fecha_registro) values (?,?,?,?,?,?)";
     private final String SQL_SELECT_ENTRADAS = "SELECT *FROM Entradas";
     
-    public Clase_Entradas(){
+    public Clase_Salidas(){
         PS = null;
         CN = new Conectar();
     }
@@ -51,10 +51,10 @@ public class Clase_Entradas {
             RS = PS.executeQuery();
             Object[] fila = new Object[4];
             while(RS.next()){
-                fila[0] = RS.getString(2);
-                fila[1] = RS.getDate(3);
-                fila[2] = RS.getString(4);
-                fila[3] = RS.getString(5);
+                fila[0] = RS.getString(1);
+                fila[1] = RS.getDate(2);
+                fila[2] = RS.getString(3);
+                fila[3] = RS.getString(4);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {

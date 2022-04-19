@@ -1,15 +1,15 @@
 package Formularios;
 
-import Clases.Clase_BuscarProveedores;
+import Clases.Clase_BuscarProductos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class Buscar_Proveedores extends javax.swing.JInternalFrame {
-    private final Clase_BuscarProveedores CP;
+public class Buscar_Productos extends javax.swing.JInternalFrame {
+    private final Clase_BuscarProductos CP;
     TableColumnModel columnModel;
     public static int enviar = 0;
-    public Integer pantalla = 0;
+    private Integer pantalla = 0;
     
     DefaultTableModel DT = new DefaultTableModel(){
         @Override
@@ -19,23 +19,16 @@ public class Buscar_Proveedores extends javax.swing.JInternalFrame {
 
     };
     
-    public Buscar_Proveedores() {
+    public Buscar_Productos(Integer pantalla) {
         initComponents();
-        CP = new Clase_BuscarProveedores();
+        CP = new Clase_BuscarProductos();
         columnModel = tabla.getColumnModel();
         listar();
-    }
-    
-        public Buscar_Proveedores(Integer pantalla) {
-        initComponents();
-        CP = new Clase_BuscarProveedores();
-        columnModel = tabla.getColumnModel();
         this.pantalla = pantalla;
-        listar();
     }
     
     private void listar(){
-        tabla.setModel(CP.getDatosProveedor());
+        tabla.setModel(CP.getDatosProductos());
     }
     
     @SuppressWarnings("unchecked")
@@ -96,32 +89,21 @@ public class Buscar_Proveedores extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-       if(Productos.enviar == 1){
-            int row = tabla.getSelectedRow();
-            Productos.txt_codigoproveedor.setText(tabla.getValueAt(row, 0).toString());
-          //  Productos.txt_nombreproveedor.setText(tabla.getValueAt(row, 1).toString());
-            Productos.enviar = 0;
-            dispose();
-        }
-        
-      //  else if(Frm_Salida.enviar == 1){
-      //      int row = tabla.getSelectedRow();
-      //      Frm_Salida.txt_descripcion.setText(tabla.getValueAt(row, 1).toString());
-       //     Frm_Salida.txt_cantidad.requestFocus();
-        //    Frm_Salida.enviar = 0;
-       //     dispose();
-      //  }
-      int row = tabla.getSelectedRow();
-      switch(this.pantalla){
+        int row = tabla.getSelectedRow();
+        switch(this.pantalla){
             case 0:{
                 break;
             }
             case 1:{// 1 - Entradas
-                Entradas.jtf_proveedor.setText(tabla.getValueAt(row, 0).toString());
+                Entradas.txt_codigo.setText(tabla.getValueAt(row, 0).toString());
+                break;
+            }
+            case 2:{// 2 - Salidas
+                Salidas.txt_codigo.setText(tabla.getValueAt(row, 0).toString());
                 break;
             }
         }
-        dispose(); 
+        dispose();      
     }//GEN-LAST:event_tablaMouseClicked
 
 
