@@ -37,6 +37,7 @@ public class Principal extends javax.swing.JFrame {
         R_Entradas = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         contenedor = new javax.swing.JDesktopPane();
+        Clientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Inventario");
@@ -64,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
                 ProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+        jPanel1.add(Productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,7 +77,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 20));
@@ -98,7 +99,7 @@ public class Principal extends javax.swing.JFrame {
                 ProveedoresActionPerformed(evt);
             }
         });
-        jPanel1.add(Proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, -1, -1));
+        jPanel1.add(Proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, -1));
 
         R_Entradas.setBackground(new java.awt.Color(255, 255, 255));
         R_Entradas.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +111,7 @@ public class Principal extends javax.swing.JFrame {
                 R_EntradasActionPerformed(evt);
             }
         });
-        jPanel1.add(R_Entradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, -1));
+        jPanel1.add(R_Entradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,7 +119,7 @@ public class Principal extends javax.swing.JFrame {
         jButton5.setToolTipText("");
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -134,6 +135,19 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jPanel1.add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 940, 540));
+
+        Clientes.setBackground(new java.awt.Color(255, 255, 255));
+        Clientes.setForeground(new java.awt.Color(255, 255, 255));
+        Clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/customer.png"))); // NOI18N
+        Clientes.setToolTipText("");
+        Clientes.setBorder(null);
+        Clientes.setPreferredSize(new java.awt.Dimension(65, 65));
+        Clientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,6 +191,13 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesActionPerformed
+        Clientes f = new Clientes();
+        contenedor.add(f);
+        f.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_ClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +229,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Clientes;
     private javax.swing.JButton Productos;
     private javax.swing.JButton Proveedores;
     private javax.swing.JButton R_Entradas;
