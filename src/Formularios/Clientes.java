@@ -102,7 +102,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         
 
         if(num == 0){
-            int respuesta = CP.registrarCliente(codigo,nombre_cliente,apellido1,apellido2,telefono,direccion,email);
+            int respuesta = CP.registrarCliente(codigo,nombre_cliente,apellido1,apellido2,telefono,email,direccion);
             if(respuesta > 0){
                 if(CP.verificarCodigoCliente(codigo) == 0){
                     CP.insertarCliente(codigo);
@@ -119,7 +119,7 @@ public class Clientes extends javax.swing.JInternalFrame {
             int row = jtb_clientes.getSelectedRow();
             String codigo_old = jtb_clientes.getValueAt(row, 0).toString();
             
-            int respuesta = CP.actualizarCliente(codigo,nombre_cliente,apellido1,apellido2, telefono,direccion,email,codigo_old);
+            int respuesta = CP.actualizarCliente(codigo,nombre_cliente,apellido1,apellido2,telefono,email,direccion,codigo_old);
             if(respuesta >0){
                 listar();
                 limpiar();
