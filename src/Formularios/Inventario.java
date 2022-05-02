@@ -56,7 +56,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setClosable(true);
-        setTitle("Registro de Productos");
+        setTitle("Inventario");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(940, 560));
         setMinimumSize(new java.awt.Dimension(940, 560));
@@ -69,7 +69,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(940, 530));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-        jLabel2.setText("Salida de Productos");
+        jLabel2.setText("Inventario");
 
         bt_actualizar.setBackground(new java.awt.Color(204, 204, 204));
         bt_actualizar.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
