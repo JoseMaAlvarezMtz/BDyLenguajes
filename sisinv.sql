@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `nombre_Cliente` varchar(45) NOT NULL,
   `apellido_Cliente` varchar(45) NOT NULL,
   `apellido2_Cliente` varchar(45) NOT NULL,
-  `telefono_Cliente` int NOT NULL,
+  `telefono_Cliente` bigint NOT NULL,
   `email_Cliente` varchar(45) NOT NULL,
   `direccion_Cliente` varchar(45) NOT NULL,
   PRIMARY KEY (`idCliente`)
@@ -181,8 +181,8 @@ DROP TABLE IF EXISTS `proveedor`;
 CREATE TABLE IF NOT EXISTS `proveedor` (
   `idProveedor` int NOT NULL,
   `nombre_Proveedor` varchar(45) NOT NULL,
-  `telefono_Proveedor` int NOT NULL,
-  `telefono2_Proveedor` int NOT NULL,
+  `telefono_Proveedor` bigint NOT NULL,
+  `telefono2_Proveedor` bigint NOT NULL,
   `direccion_Proveedor` varchar(45) NOT NULL,
   `email_Proveedor` varchar(45) NOT NULL,
   `descripcion_Proveedor` varchar(45) DEFAULT NULL,
