@@ -1,15 +1,14 @@
 package Formularios;
 
-import Clases.Clase_BuscarProductos;
+import Clases.Clase_BuscarClientes;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class Buscar_Productos extends javax.swing.JInternalFrame {
-    private final Clase_BuscarProductos CP;
+public class Buscar_Clientes extends javax.swing.JInternalFrame {
+    private final Clase_BuscarClientes CC;
     TableColumnModel columnModel;
     public static int enviar = 0;
-    private Integer pantalla = 0;
     
     DefaultTableModel DT = new DefaultTableModel(){
         @Override
@@ -19,16 +18,15 @@ public class Buscar_Productos extends javax.swing.JInternalFrame {
 
     };
     
-    public Buscar_Productos(Integer pantalla) {
+    public Buscar_Clientes() {
         initComponents();
-        CP = new Clase_BuscarProductos();
+        CC = new Clase_BuscarClientes();
         columnModel = tabla.getColumnModel();
         listar();
-        this.pantalla = pantalla;
     }
     
     private void listar(){
-        tabla.setModel(CP.getDatosProductos());
+        tabla.setModel(CC.getDatosClientes());
     }
     
     @SuppressWarnings("unchecked")
@@ -90,19 +88,7 @@ public class Buscar_Productos extends javax.swing.JInternalFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         int row = tabla.getSelectedRow();
-        switch(this.pantalla){
-            case 0:{
-                break;
-            }
-            case 1:{// 1 - Entradas
-                Entradas.txt_codigo.setText(tabla.getValueAt(row, 0).toString());
-                break;
-            }
-            case 2:{// 2 - Salidas
-                Salidas.txt_codigo.setText(tabla.getValueAt(row, 0).toString());
-                break;
-            }
-        }
+        Salidas.jtf_codigocliente.setText(tabla.getValueAt(row, 0).toString());
         dispose();      
     }//GEN-LAST:event_tablaMouseClicked
 

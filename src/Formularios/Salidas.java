@@ -1,6 +1,6 @@
 package Formularios;
 
-import Clases.Clase_Entradas;
+import Clases.Clase_Salidas;
 import java.awt.Dimension;
 
 import java.util.Date;
@@ -9,14 +9,14 @@ import javax.swing.table.TableColumnModel;
 import static Formularios.Principal.contenedor;
 
 public class Salidas extends javax.swing.JInternalFrame {
-    private final Clase_Entradas CE;
+    private final Clase_Salidas CS;
     TableColumnModel columnModel;
     int num = 0;
     
     
     public Salidas() {
         initComponents();
-        CE = new Clase_Entradas();
+        CS = new Clase_Salidas();
         columnModel = jtb_entradas.getColumnModel();
         listar();
         iniciar();
@@ -26,7 +26,7 @@ public class Salidas extends javax.swing.JInternalFrame {
     }
 
     private void listar(){
-        jtb_entradas.setModel(CE.getDatosEntradas());
+        jtb_entradas.setModel(CS.getDatosEntradas());
         columnModel.getColumn(1).setPreferredWidth(600);
     }
     
@@ -68,7 +68,7 @@ public class Salidas extends javax.swing.JInternalFrame {
         
 
         if(num == 0){
-            int respuesta = CE.registrarEntrada(codigo,fecha_sql,cantidad,proveedor);
+            int respuesta = CS.registrarEntrada(codigo,fecha_sql,cantidad,proveedor);
             if(respuesta > 0){
                 /*if(CE.verificarCodigoInventario(codigo) == 0){
                     CE.insertarProductoInventario(codigo);
@@ -221,6 +221,11 @@ public class Salidas extends javax.swing.JInternalFrame {
 
         jb_buscarcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jb_buscarcliente.setContentAreaFilled(false);
+        jb_buscarcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_buscarclienteActionPerformed(evt);
+            }
+        });
 
         jb_buscarproducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
         jb_buscarproducto.setContentAreaFilled(false);
@@ -405,7 +410,7 @@ public class Salidas extends javax.swing.JInternalFrame {
         else{
             int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar?","Eliminar Entrada", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(resp==0){
-                if (CE.eliminarEntrada(jtb_entradas.getValueAt(jtb_entradas.getSelectedRow(), 0).toString()) > 0){
+                if (CS.eliminarEntrada(jtb_entradas.getValueAt(jtb_entradas.getSelectedRow(), 0).toString()) > 0){
                     listar();
                     limpiar();
                     bt_eliminar.setEnabled(false);
@@ -437,6 +442,16 @@ public class Salidas extends javax.swing.JInternalFrame {
         C.toFront();
         C.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jb_buscarproductoActionPerformed
+
+    private void jb_buscarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscarclienteActionPerformed
+        Buscar_Clientes C = new Buscar_Clientes();
+        Principal.contenedor.add(C);
+        Dimension desktopSize = contenedor.getSize();
+        Dimension FrameSize = C.getSize();
+        C.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        C.toFront();
+        C.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jb_buscarclienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

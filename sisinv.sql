@@ -28,7 +28,7 @@ DELIMITER $$
 -- Procedimientos
 --
 DROP PROCEDURE IF EXISTS `Inventario_Total_Fecha`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Inventario_Total_Fecha` (IN `FECHA` CHAR(12))  SELECT p.idProducto AS codigo, p.nom_Producto, (SELECT ((IF(SUM(e.cantidad_Entrada)is null,0,SUM(e.cantidad_Entrada))) - (SELECT IF(SUM(s.cantidad_Salida) is null,0,SUM(s.cantidad_Salida)) FROM salidas s WHERE p.idProducto = s.codigo_Salida AND s.fecha_Salida < FECHA)) FROM entradas e WHERE p.idProducto = e.codigo_Entrada AND e.fecha_Entrada < FECHA) as Stock FROM producto p$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Inventario_Total_Fecha` (IN `FECHA` CHAR(12))  SELECT p.idProducto AS codigo, p.nom_Producto, (SELECT ((IF(SUM(e.cantidad_Entrada)is null,0,SUM(e.cantidad_Entrada))) - (SELECT IF(SUM(s.cantidad_Salida) is null,0,SUM(s.cantidad_Salida)) FROM salidas s WHERE p.idProducto = s.codigo_Salida AND s.fecha_Salida <= FECHA)) FROM entradas e WHERE p.idProducto = e.codigo_Entrada AND e.fecha_Entrada <= FECHA) as Stock FROM producto p$$
 
 DROP PROCEDURE IF EXISTS `NUEVO_CLIENTE`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `NUEVO_CLIENTE` (`CODIGO` VARCHAR(10))  INSERT INTO Cliente (idCliente) VALUES (CODIGO)$$

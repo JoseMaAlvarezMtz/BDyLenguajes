@@ -21,9 +21,9 @@ public class Clase_Salidas {
     private ResultSet RS;
     private final Conectar CN;
     private DefaultTableModel DT;
-    private final String SQL_INSERT_ENTRADAS = "INSERT INTO Entradas (idProducto, nom_Producto,"
-            + "descripcion_Producto, precio_Producto, precio_sugerido, fecha_registro) values (?,?,?,?,?,?)";
-    private final String SQL_SELECT_ENTRADAS = "SELECT *FROM Entradas";
+    private final String SQL_INSERT_SALIDAS = "INSERT INTO Salidas (codigo_Salida, fecha_Salida,"
+            + "cantidad_Salida, idCliente) values (?,?,?,?)";
+    private final String SQL_SELECT_SALIDAS = "SELECT *FROM Salidas";
     
     public Clase_Salidas(){
         PS = null;
@@ -38,23 +38,23 @@ public class Clase_Salidas {
             }
         };
         DT.addColumn("Codigo del producto");
-        DT.addColumn("Fecha de entrada");
+        DT.addColumn("Fecha de salida");
         DT.addColumn("Cantidad");
-        DT.addColumn("Proveedor");
+        DT.addColumn("Cliente");
         return DT;
     }
     
     public DefaultTableModel getDatosEntradas(){
         try {
             setTitulosEntradas();
-            PS = CN.getConnection().prepareStatement(SQL_SELECT_ENTRADAS);
+            PS = CN.getConnection().prepareStatement(SQL_SELECT_SALIDAS);
             RS = PS.executeQuery();
             Object[] fila = new Object[4];
             while(RS.next()){
-                fila[0] = RS.getString(1);
-                fila[1] = RS.getDate(2);
-                fila[2] = RS.getString(3);
-                fila[3] = RS.getString(4);
+                fila[0] = RS.getString(2);
+                fila[1] = RS.getDate(3);
+                fila[2] = RS.getString(4);
+                fila[3] = RS.getString(5);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {
@@ -67,23 +67,23 @@ public class Clase_Salidas {
         return DT;
     }
     
-    public int registrarEntrada(String codigo, Date fecharegistro, String cantidad, Integer proveedor){
+    public int registrarEntrada(String codigo, Date fecharegistro, String cantidad, Integer cliente){
         int res=0;
         
         try {
-            PS = CN.getConnection().prepareStatement(SQL_INSERT_ENTRADAS);
+            PS = CN.getConnection().prepareStatement(SQL_INSERT_SALIDAS);
             PS.setString(1, codigo);
             PS.setDate(2, fecharegistro);
             PS.setString(3, cantidad);
-            PS.setInt(4, proveedor);
+            PS.setInt(4, cliente);
             
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Entrada registrada con éxito.");
+                JOptionPane.showMessageDialog(null, "Salida registrada con éxito.");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo registrar la entrada.");
-            System.err.println("Error al registrar la entrada." +e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo registrar la salida.");
+            System.err.println("Error al registrar la salida." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();
@@ -91,70 +91,18 @@ public class Clase_Salidas {
         return res;
     }
     
-    
-    /*public void insertarProductoInventario(String codigoProducto){
-        int res;
-        try {
-            PS = CN.getConnection().prepareStatement("CALL NUEVO_PRODUCTO('"+codigoProducto+"')");
-            PS.executeQuery();
-        } catch (SQLException e) {
-            System.err.println("Error al insertar registro en la tabla inventario." +e.getMessage());
-        } finally{
-            PS = null;
-            CN.desconectar();
-        }
-    } */
-    
-    /*public int verificarCodigoInventario(String codigo){
-        int res=0;
-        try {
-            PS = CN.getConnection().prepareStatement("SELECT count(codigo_Inventario) from Inventario where codigo_Inventario='"+codigo+"'");
-            RS = PS.executeQuery();
-           
-            while(RS.next()){
-                res = RS.getInt(1);
-            }
-            
-        } catch (SQLException e) {
-            System.err.println("Error al devolver cantidad de registros." +e.getMessage());
-        } finally{
-            PS = null;
-            CN.desconectar();
-        }
-        return res;
-    }*/
-    
-    
-    /*public int actualizarEntrada(String codigo, Date fecharegistro,  String categoria, Integer idProveedor){
-        String SQL = "UPDATE Entradas SET codigo_Entrada='"+codigo+"',fecha_registro='"+fecharegistro+"' WHERE idProducto='"+codigo_old+"'";
-        int res=0;
-        try {
-            PS = CN.getConnection().prepareStatement(SQL);
-            res = PS.executeUpdate();
-            if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al modificar los datos del cliente." +e.getMessage());
-        } finally{
-            PS = null;
-            CN.desconectar();
-        }
-        return res;
-    }*/
-    
     public int eliminarEntrada(String codigo){
-        String SQL = "DELETE from Entrada WHERE idEntradas ='"+codigo+"'";
+        String SQL = "DELETE from Salidas WHERE idSalidas ='"+codigo+"'";
         int res=0;
         try {
             PS = CN.getConnection().prepareStatement(SQL);
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto eliminado con éxito");
+                JOptionPane.showMessageDialog(null, "Salida eliminada con éxito");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No es posible eliminar el producto.");
-            System.err.println("Error al eliminar producto." +e.getMessage());
+            JOptionPane.showMessageDialog(null, "No es posible eliminar la salida.");
+            System.err.println("Error al eliminar la salida." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();

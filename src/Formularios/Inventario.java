@@ -2,13 +2,7 @@ package Formularios;
 
 
 import Clases.Clase_Inventario;
-import java.awt.Dimension;
-
-import java.util.Date;
-import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
-import static Formularios.Principal.contenedor;
-import java.text.SimpleDateFormat;
 
 public class Inventario extends javax.swing.JInternalFrame {
     private final Clase_Inventario CI;
@@ -18,14 +12,14 @@ public class Inventario extends javax.swing.JInternalFrame {
     public Inventario() {
         initComponents();
         CI = new Clase_Inventario();
-        columnModel = jtb_entradas.getColumnModel();
+        columnModel = jtb_inventario.getColumnModel();
         listar();
         iniciar();
         bt_actualizar.setEnabled(true);
     }
 
     private void listar(){
-        jtb_entradas.setModel(CI.getDatosInventario());
+        jtb_inventario.setModel(CI.getDatosInventario());
         columnModel.getColumn(1).setPreferredWidth(450);
     }
     
@@ -34,7 +28,7 @@ public class Inventario extends javax.swing.JInternalFrame {
     }
     
     private void limpiar(){
-        jtb_entradas.clearSelection();
+        jtb_inventario.clearSelection();
     }
     
     private void actualizar(){
@@ -51,7 +45,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         bt_actualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtb_entradas = new javax.swing.JTable();
+        jtb_inventario = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -80,7 +74,7 @@ public class Inventario extends javax.swing.JInternalFrame {
             }
         });
 
-        jtb_entradas.setModel(new javax.swing.table.DefaultTableModel(
+        jtb_inventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -88,12 +82,12 @@ public class Inventario extends javax.swing.JInternalFrame {
 
             }
         ));
-        jtb_entradas.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtb_inventario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtb_entradasMouseClicked(evt);
+                jtb_inventarioMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtb_entradas);
+        jScrollPane1.setViewportView(jtb_inventario);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,9 +132,9 @@ public class Inventario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtb_entradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_entradasMouseClicked
+    private void jtb_inventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_inventarioMouseClicked
       
-    }//GEN-LAST:event_jtb_entradasMouseClicked
+    }//GEN-LAST:event_jtb_inventarioMouseClicked
 
     private void bt_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_actualizarActionPerformed
         actualizar();// TODO add your handling code here:
@@ -152,6 +146,6 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtb_entradas;
+    private javax.swing.JTable jtb_inventario;
     // End of variables declaration//GEN-END:variables
 }
