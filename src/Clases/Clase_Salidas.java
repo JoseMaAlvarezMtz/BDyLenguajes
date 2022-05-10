@@ -37,6 +37,7 @@ public class Clase_Salidas {
                 return false;
             }
         };
+        DT.addColumn("Codigo Salida");
         DT.addColumn("Codigo del producto");
         DT.addColumn("Fecha de salida");
         DT.addColumn("Cantidad");
@@ -49,12 +50,13 @@ public class Clase_Salidas {
             setTitulosEntradas();
             PS = CN.getConnection().prepareStatement(SQL_SELECT_SALIDAS);
             RS = PS.executeQuery();
-            Object[] fila = new Object[4];
+            Object[] fila = new Object[5];
             while(RS.next()){
-                fila[0] = RS.getString(2);
-                fila[1] = RS.getDate(3);
-                fila[2] = RS.getString(4);
-                fila[3] = RS.getString(5);
+                fila[0] = RS.getString(1);
+                fila[1] = RS.getString(2);
+                fila[2] = RS.getDate(3);
+                fila[3] = RS.getString(4);
+                fila[4] = RS.getString(5);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {
@@ -84,6 +86,24 @@ public class Clase_Salidas {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo registrar la salida.");
             System.err.println("Error al registrar la salida." +e.getMessage());
+        } finally{
+            PS = null;
+            CN.desconectar();
+        }
+        return res;
+    }
+    
+    public int actualizarEntrada(Integer idEntrada, String codigo, Date fecharegistro,  String cantidad, Integer idProveedor){
+        String SQL = "UPDATE Salidas SET codigo_Salida='"+codigo+"',fecha_Salida='"+fecharegistro+"',cantidad_Salida='"+cantidad+"',idCliente='"+idProveedor+"' WHERE idSalidas='"+idEntrada+"'";
+        int res=0;
+        try {
+            PS = CN.getConnection().prepareStatement(SQL);
+            res = PS.executeUpdate();
+            if(res > 0){
+                JOptionPane.showMessageDialog(null, "Salida actualizada con éxito");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar los datos." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();

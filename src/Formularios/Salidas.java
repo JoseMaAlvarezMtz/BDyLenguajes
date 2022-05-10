@@ -83,15 +83,15 @@ public class Salidas extends javax.swing.JInternalFrame {
         
         else{
             int row = jtb_entradas.getSelectedRow();
-            String codigo_old = jtb_entradas.getValueAt(row, 0).toString();
+            Integer idSalida = Integer.parseInt(jtb_entradas.getValueAt(row, 0).toString());
             
-            /*int respuesta = CE.actualizarEntrada(codigo,fecha_sql,cantidad,proveedor);
+            int respuesta = CS.actualizarEntrada(idSalida,codigo,fecha_sql,cantidad,proveedor);
             if(respuesta >0){
                 listar();
                 limpiar();
                 iniciar();
                 num=0;
-            }*/
+            }
         }
         
     }
@@ -380,10 +380,9 @@ public class Salidas extends javax.swing.JInternalFrame {
         bt_editar.setEnabled(true);
         bt_eliminar.setEnabled(true);
         int row = jtb_entradas.getSelectedRow(); 
-        txt_codigo.setText(jtb_entradas.getValueAt(row, 0).toString());
-        jdc_fecharegistro.setDateFormatString(jtb_entradas.getValueAt(row, 1).toString());
-        txt_cantidad.setText(jtb_entradas.getValueAt(row, 2).toString());
-        jtf_codigocliente.setText(jtb_entradas.getValueAt(row, 3).toString());
+        txt_codigo.setText(jtb_entradas.getValueAt(row, 1).toString());
+        txt_cantidad.setText(jtb_entradas.getValueAt(row, 3).toString());
+        jtf_codigocliente.setText(jtb_entradas.getValueAt(row, 4).toString());
       
     }//GEN-LAST:event_jtb_entradasMouseClicked
 
@@ -408,7 +407,7 @@ public class Salidas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione un registro de la tabla");
         }
         else{
-            int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar?","Eliminar Entrada", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar?","Eliminar Salida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(resp==0){
                 if (CS.eliminarEntrada(jtb_entradas.getValueAt(jtb_entradas.getSelectedRow(), 0).toString()) > 0){
                     listar();

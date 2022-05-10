@@ -61,9 +61,9 @@ public class Entradas extends javax.swing.JInternalFrame {
     private void guardar(){
         String codigo = txt_codigo.getText();
         String cantidad = txt_cantidad.getText();
-        Date fecharegistro = jdc_fecharegistro.getDate();
         String proveedortxt = jtf_proveedor.getText();
         Integer proveedor = Integer.parseInt(proveedortxt);
+        Date fecharegistro = jdc_fecharegistro.getDate();
         long d = fecharegistro.getTime();
         java.sql.Date fecha_sql = new java.sql.Date(d);
         
@@ -84,15 +84,15 @@ public class Entradas extends javax.swing.JInternalFrame {
         
         else{
             int row = jtb_entradas.getSelectedRow();
-            String codigo_old = jtb_entradas.getValueAt(row, 0).toString();
+            Integer idEntrada = Integer.parseInt(jtb_entradas.getValueAt(row, 0).toString());
             
-            /*int respuesta = CE.actualizarEntrada(codigo,fecha_sql,cantidad,proveedor);
+            int respuesta = CE.actualizarEntrada(idEntrada,codigo,fecha_sql,cantidad,proveedor);
             if(respuesta >0){
                 listar();
                 limpiar();
                 iniciar();
                 num=0;
-            }*/
+            }
         }
         
     }
@@ -279,10 +279,11 @@ public class Entradas extends javax.swing.JInternalFrame {
                 .addGap(56, 56, 56)
                 .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_APLayout.createSequentialGroup()
-                        .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jb_BuscarProducto))
+                        .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jb_BuscarProducto)
+                            .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11)
+                                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -294,9 +295,8 @@ public class Entradas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_APLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jb_BuscarProveedor))
+                    .addComponent(jb_BuscarProveedor)
+                    .addComponent(jLabel6)
                     .addComponent(jtf_proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
@@ -380,10 +380,9 @@ public class Entradas extends javax.swing.JInternalFrame {
         bt_editar.setEnabled(true);
         bt_eliminar.setEnabled(true);
         int row = jtb_entradas.getSelectedRow(); 
-        txt_codigo.setText(jtb_entradas.getValueAt(row, 0).toString());
-        jdc_fecharegistro.setDateFormatString(jtb_entradas.getValueAt(row, 1).toString());
-        txt_cantidad.setText(jtb_entradas.getValueAt(row, 2).toString());
-        jtf_proveedor.setText(jtb_entradas.getValueAt(row, 3).toString());
+        txt_codigo.setText(jtb_entradas.getValueAt(row, 1).toString());
+        txt_cantidad.setText(jtb_entradas.getValueAt(row, 3).toString());
+        jtf_proveedor.setText(jtb_entradas.getValueAt(row, 4).toString());
       
     }//GEN-LAST:event_jtb_entradasMouseClicked
 
@@ -457,7 +456,7 @@ public class Entradas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Panel_AP;
+    private static javax.swing.JPanel Panel_AP;
     private javax.swing.JButton bt_agregar;
     private javax.swing.JButton bt_editar;
     private javax.swing.JButton bt_eliminar;

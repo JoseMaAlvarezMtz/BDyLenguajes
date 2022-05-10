@@ -37,6 +37,7 @@ public class Clase_Entradas {
                 return false;
             }
         };
+        DT.addColumn("Codigo Entrada");
         DT.addColumn("Codigo del producto");
         DT.addColumn("Fecha de entrada");
         DT.addColumn("Cantidad");
@@ -49,12 +50,13 @@ public class Clase_Entradas {
             setTitulosEntradas();
             PS = CN.getConnection().prepareStatement(SQL_SELECT_ENTRADAS);
             RS = PS.executeQuery();
-            Object[] fila = new Object[4];
+            Object[] fila = new Object[5];
             while(RS.next()){
-                fila[0] = RS.getString(2);
-                fila[1] = RS.getDate(3);
-                fila[2] = RS.getString(4);
-                fila[3] = RS.getString(5);
+                fila[0] = RS.getString(1);
+                fila[1] = RS.getString(2);
+                fila[2] = RS.getDate(3);
+                fila[3] = RS.getString(4);
+                fila[4] = RS.getString(5);
                 DT.addRow(fila);
             }
         } catch (SQLException e) {
@@ -91,70 +93,36 @@ public class Clase_Entradas {
         return res;
     }
     
-    
-    /*public void insertarProductoInventario(String codigoProducto){
-        int res;
-        try {
-            PS = CN.getConnection().prepareStatement("CALL NUEVO_PRODUCTO('"+codigoProducto+"')");
-            PS.executeQuery();
-        } catch (SQLException e) {
-            System.err.println("Error al insertar registro en la tabla inventario." +e.getMessage());
-        } finally{
-            PS = null;
-            CN.desconectar();
-        }
-    } */
-    
-    /*public int verificarCodigoInventario(String codigo){
-        int res=0;
-        try {
-            PS = CN.getConnection().prepareStatement("SELECT count(codigo_Inventario) from Inventario where codigo_Inventario='"+codigo+"'");
-            RS = PS.executeQuery();
-           
-            while(RS.next()){
-                res = RS.getInt(1);
-            }
-            
-        } catch (SQLException e) {
-            System.err.println("Error al devolver cantidad de registros." +e.getMessage());
-        } finally{
-            PS = null;
-            CN.desconectar();
-        }
-        return res;
-    }*/
-    
-    
-    /*public int actualizarEntrada(String codigo, Date fecharegistro,  String categoria, Integer idProveedor){
-        String SQL = "UPDATE Entradas SET codigo_Entrada='"+codigo+"',fecha_registro='"+fecharegistro+"' WHERE idProducto='"+codigo_old+"'";
+    public int actualizarEntrada(Integer idEntrada, String codigo, Date fecharegistro,  String cantidad, Integer idProveedor){
+        String SQL = "UPDATE Entradas SET codigo_Entrada='"+codigo+"',fecha_Entrada='"+fecharegistro+"',cantidad_Entrada='"+cantidad+"',idProveedor='"+idProveedor+"' WHERE idEntradas='"+idEntrada+"'";
         int res=0;
         try {
             PS = CN.getConnection().prepareStatement(SQL);
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
+                JOptionPane.showMessageDialog(null, "Entrada actualizada con éxito");
             }
         } catch (SQLException e) {
-            System.err.println("Error al modificar los datos del cliente." +e.getMessage());
+            System.err.println("Error al modificar los datos." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();
         }
         return res;
-    }*/
+    }
     
-    public int eliminarEntrada(String codigo){
-        String SQL = "DELETE from Entrada WHERE idEntradas ='"+codigo+"'";
+    public int eliminarEntrada(String idEntrada){
+        String SQL = "DELETE from entradas WHERE idEntradas ='"+idEntrada+"'";
         int res=0;
         try {
             PS = CN.getConnection().prepareStatement(SQL);
             res = PS.executeUpdate();
             if(res > 0){
-                JOptionPane.showMessageDialog(null, "Producto eliminado con éxito");
+                JOptionPane.showMessageDialog(null, "Entrada eliminada con éxito");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No es posible eliminar el producto.");
-            System.err.println("Error al eliminar producto." +e.getMessage());
+            JOptionPane.showMessageDialog(null, "No es posible eliminar la entrada.");
+            System.err.println("Error al eliminar el registro." +e.getMessage());
         } finally{
             PS = null;
             CN.desconectar();
